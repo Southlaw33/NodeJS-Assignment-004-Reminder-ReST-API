@@ -4,7 +4,7 @@ class reminder{
     dueDate: Date;
     description: string="" ;
     completed: boolean = false;
-    constructor(id: number, title: string, dueDate: Date,description : string){
+    constructor(id: number, title: string, dueDate: Date, description : string){
         this.id = id;
         this.title = title;
         this.dueDate = dueDate;
@@ -28,7 +28,7 @@ class ReminderDataBase{
     removeReminder(id: string){
         this.reminders.delete(id);
     }
-    updateReminder(id: string, title: string, dueDate: Date){ 
+    updateReminder(id: string, title: string, dueDate: Date,description : string){ 
         const rem = this.reminders.get(id);
         if(rem){
             if(title){

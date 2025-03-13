@@ -37,5 +37,16 @@ app.get("/reminders/:id", (c) => {
   return reminder ? c.json(reminder) : c.json({ error: "Reminder not found" }, 404);
 });
 
+app.patch("/reminders/:id", async (c) => {
+  const id = c.req.param("id");
+  if (!db.exists(id)) return c.json({ error: "Reminder not found" }, 404);
+  
+  const { title, date, description } = await c.req.json();
+  db.updateReminder(id, title, date, description );
+  return c.json({ message: "Reminder updated successfully" });
+});
+
+
+
 serve(app);
 console.log("Server running!!");
