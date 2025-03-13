@@ -58,6 +58,7 @@ class ReminderDataBase{
         }
         return null;
     }
+    
     getAllRemindersNotMarkedAsCompleted(): reminder[] | null {
         const reminders = this.getAllReminders();
         if (reminders) {
