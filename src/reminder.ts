@@ -1,20 +1,21 @@
 class reminder{
     id: number;
     title: string;
-    date: Date;
+    dueDate: Date;
+    description: string="" ;
     completed: boolean = false;
-    constructor(id: number, title: string, date: Date){
+    constructor(id: number, title: string, dueDate: Date,description : string){
         this.id = id;
         this.title = title;
-        this.date = date;
+        this.dueDate = dueDate;
     }
 }
 
 class ReminderDataBase{
     reminders: Map<String, reminder> = new Map();
-    createReminder(title: string, date: Date){
+    createReminder(title: string, dueDate: Date,description : string){
         const id = Math.floor(Math.random() * 1000);
-        const rem = new reminder(id, title, date);
+        const rem = new reminder(id, title, dueDate,description);
         this.reminders.set(id.toString(), rem);
     }
     getAllReminders(): reminder[] | null{
@@ -27,14 +28,14 @@ class ReminderDataBase{
     removeReminder(id: string){
         this.reminders.delete(id);
     }
-    updateReminder(id: string, title: string, date: Date){ 
+    updateReminder(id: string, title: string, dueDate: Date){ 
         const rem = this.reminders.get(id);
         if(rem){
             if(title){
                 rem.title = title;
             }
-            if(date){
-                rem.date = date;
+            if(dueDate){
+                rem.dueDate = dueDate;
             }
             this.reminders.set(id, rem);
 
@@ -45,7 +46,7 @@ class ReminderDataBase{
         const today = new Date();
         const reminders = this.getAllReminders();
         if (reminders) {
-            return reminders.filter(rem => rem.date.getDate() === today.getDate());
+            return reminders.filter(rem => rem.dueDate.getDate() === today.getDate());
         }
         return null;
     }
